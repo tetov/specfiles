@@ -3,8 +3,8 @@
 %global xcaddy_ver 0.2.1
 Version: 2.4.6
 
-Name:           caddy
-Release:        1%{?dist}
+Name:           caddy-tetov
+Release:        2%{?dist}
 Summary:        Web server with automatic HTTPS
 License:        ASL 2.0
 URL:            https://caddyserver.com
@@ -29,6 +29,9 @@ BuildRequires:  systemd-rpm-macros
 %{?systemd_requires}
 Provides:       webserver
 
+Obsoletes:          caddy <= %{version}
+Provides:           caddy = %{version}
+Conflicts:          caddy
 
 %description
 Caddy is the web server with automatic HTTPS.
@@ -157,6 +160,9 @@ fi
 
 
 %changelog
+* Wed Mar 09 2022 Anton Tetov <anton@tetov.se> - 2.4.6-2
+- Package name change, setup
+
 * Mon Nov 08 2021 Neal Gompa <ngompa13@gmail.com> - 2.4.6-1
 - Latest upstream
 
