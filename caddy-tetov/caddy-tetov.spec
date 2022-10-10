@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 %global _missing_build_ids_terminate_build 0
-%global xcaddy_ver 0.3.0
-Version: 2.5.2
+%global xcaddy_ver 0.3.1
+Version: 2.6.1
 
 Name:           caddy-tetov
 Release:        1%{?dist}
@@ -160,6 +160,9 @@ fi
 
 
 %changelog
+* Mon Oct 10 2022 Anton Tetov <anton@tetov.se> - 2.6.1-1
+- Bump xcaddy & caddy
+
 * Wed Mar 09 2022 Anton Tetov <anton@tetov.se> - 2.4.6-2
 - Package name change, setup
 
