@@ -4,7 +4,7 @@
 Version: 2.6.1
 
 Name:           caddy-tetov
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Web server with automatic HTTPS
 License:        ASL 2.0
 URL:            https://caddyserver.com
@@ -16,8 +16,6 @@ Source1:        https://raw.githubusercontent.com/caddyserver/dist/master/config
 Source2:        https://raw.githubusercontent.com/caddyserver/dist/master/init/caddy.service
 Source3:        https://raw.githubusercontent.com/caddyserver/dist/master/init/caddy-api.service
 Source4:        https://raw.githubusercontent.com/caddyserver/dist/master/welcome/index.html
-Source5:        https://raw.githubusercontent.com/caddyserver/dist/master/scripts/completions/bash-completion
-Source6:        https://raw.githubusercontent.com/caddyserver/dist/master/scripts/completions/_caddy
 # Since we are not using a traditional source tarball, we need to explicitly
 # pull in the license file.
 Source10:       https://raw.githubusercontent.com/caddyserver/caddy/v%{version}/LICENSE
@@ -61,6 +59,10 @@ export GO_BUILD_FLAGS='-ldflags=-linkmode=external'
         --with github.com/abiosoft/caddy-json-schema    \
         --with github.com/awoodbeck/caddy-validate-github
 
+for i in zsh bash fish; do
+    ./caddy completion $i >caddy.$i
+done
+
 %install
 # command
 install -D -p -m 0755 caddy %{buildroot}%{_bindir}/caddy
@@ -79,9 +81,9 @@ install -d -m 0750 %{buildroot}%{_sharedstatedir}/caddy
 install -D -p -m 0644 %{S:4} %{buildroot}%{_datadir}/caddy/index.html
 
 # shell completion
-install -D -p -m 0644 %{S:5} %{buildroot}%{_datadir}/bash-completion/completions/caddy
-install -D -p -m 0644 %{S:6} %{buildroot}%{_datadir}/zsh/site-functions/_caddy
-
+install -D -p -m 0644 caddy.bash %{buildroot}%{_datadir}/bash-completion/completions/caddy
+install -D -p -m 0644 caddy.zsh %{buildroot}%{_datadir}/zsh/site-functions/_caddy
+install -D -p -m 0644 caddy.fish -t %{buildroot}%{_datadir}/fish/vendor_completions.d
 
 %pre
 getent group caddy &> /dev/null || \
@@ -157,9 +159,15 @@ fi
 %dir %{_datadir}/zsh
 %dir %{_datadir}/zsh/site-functions
 %{_datadir}/zsh/site-functions/_caddy
-
+# own parent directories in case fish is not installed
+%dir %{_datadir}/fish
+%dir %{_datadir}/fish/vendor_completions.d
+%{_datadir}/fish/vendor_completions.d/caddy.fish
 
 %changelog
+* Mon Oct 10 2022 Anton Tetov <anton@tetov.se> - 2.6.1-2
+- Generate completions since they were removed from repo.
+
 * Mon Oct 10 2022 Anton Tetov <anton@tetov.se> - 2.6.1-1
 - Bump xcaddy & caddy
 
