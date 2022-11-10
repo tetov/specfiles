@@ -1,10 +1,10 @@
 %global debug_package %{nil}
 %global _missing_build_ids_terminate_build 0
 %global xcaddy_ver 0.3.1
-Version: 2.6.1
+Version: 2.6.2
 
 Name:           caddy-tetov
-Release:        2%{?dist}
+Release:        1%{?dist}
 Summary:        Web server with automatic HTTPS
 License:        ASL 2.0
 URL:            https://caddyserver.com
@@ -165,6 +165,9 @@ fi
 %{_datadir}/fish/vendor_completions.d/caddy.fish
 
 %changelog
+* Thu Nov 10 2022 Anton Tetov <anton@tetov.se> - 2.6.2-1
+- Latest upstream
+
 * Mon Oct 10 2022 Anton Tetov <anton@tetov.se> - 2.6.1-2
 - Generate completions since they were removed from repo.
 
