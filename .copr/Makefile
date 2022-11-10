@@ -4,11 +4,11 @@ rpmbuild_src = $(shell rpmbuild --eval '%{_sourcedir}')
 
 prepare:
 	dnf -y install rpmdevtools rpm-build
-	cp *.patch $(rpmbuild_src)
-	spectool -g -R $(spec)
+	cp $(spec)/*.patch $(rpmbuild_src)
+	spectool -g -R $(spec)/*.spec
 
 srpm: prepare
-	rpmbuild -bs --define "_srcrpmdir $(outdir)" $(spec)
+	rpmbuild -bs --define "_srcrpmdir $(outdir)" "$(spec)/*.spec"
 
 rpm: prepare
-	rpmbuild -bb --define "_rpmdir $(outdir)" $(spec)
+	rpmbuild -bb --define "_rpmdir $(outdir)" "$(spec)/*.spec"
