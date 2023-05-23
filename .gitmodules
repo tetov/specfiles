@@ -2,7 +2,3 @@
 	path = NetworkManager-l2tp
 	url = https://codeberg.org/tetov/NetworkManager-l2tp.git
 	branch = f36
-[submodule "libreswan"]
-	path = libreswan
-	url = https://codeberg.org/tetov/libreswan.git
-	branch = f36
