@@ -1,4 +1,0 @@
-[submodule "NetworkManager-l2tp"]
-	path = NetworkManager-l2tp
-	url = https://codeberg.org/tetov/NetworkManager-l2tp.git
-	branch = f36
