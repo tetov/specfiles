@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 %global _missing_build_ids_terminate_build 0
-%global xcaddy_ver 0.3.1
-Version: 2.6.2
+%global xcaddy_ver 0.4.0
+Version: 2.7.6
 
 Name:           caddy-tetov
 Release:        1%{?dist}
